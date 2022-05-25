@@ -13,7 +13,8 @@ export class Board {
     for (let i = 0; i < this.height; i++) {
       for(let i2 = 0; i2 < this.width; i2++){
         display = display+'.';
-      }}
+      }
+    display = display+'/n';}
     return display;
   }
 }
