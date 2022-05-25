@@ -3,8 +3,9 @@ export class Board {
   height;
   falling = false;
   display = '';
+  fallingBlock;
 
-  drop(block){ this.falling = true; }
+  drop(block){ this.falling = true; this.fallingBlock = block;}
 
   constructor(width, height) {
     this.width = width;
