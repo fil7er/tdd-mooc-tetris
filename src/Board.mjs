@@ -12,6 +12,8 @@ export class Board {
     this.height = height;
   }
 
+  tick(){}
+
   toString() {
     for (let i = 0; i < this.height; i++) {
       for(let i2 = 0; i2 < this.width; i2++){
