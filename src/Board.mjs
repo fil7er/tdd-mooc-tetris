@@ -1,7 +1,8 @@
 export class Board {
   width;
   height;
-  drop(){}
+  falling = false;
+  drop(block){return block;}
 
   constructor(width, height) {
     this.width = width;
