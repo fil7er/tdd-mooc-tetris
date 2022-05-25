@@ -10,7 +10,7 @@ export class Board {
   }
 
   toString() {
-    let display;
+    let display = '';
     for (let i = 0; i < this.height; i++) {
       for(let i2 = 0; i2 < this.width; i2++){
         display = display+'.';
