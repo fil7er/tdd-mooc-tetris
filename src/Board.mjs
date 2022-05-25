@@ -10,6 +10,7 @@ export class Board {
   }
 
   toString() {
+    for (let i = 0; i < this.height; i++) {}
     return display;
   }
 }
