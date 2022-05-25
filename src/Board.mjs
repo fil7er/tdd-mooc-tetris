@@ -5,7 +5,7 @@ export class Board {
   display = '';
   fallingBlock;
 
-  drop(block){ this.falling = true; this.fallingBlock = block;}
+  drop(block){ this.falling = true; this.fallingBlock = block.color;}
 
   constructor(width, height) {
     this.width = width;
