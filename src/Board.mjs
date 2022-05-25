@@ -10,6 +10,6 @@ export class Board {
   }
 
   toString() {
-    return "...\n...\n...\n";
+    return display;
   }
 }
