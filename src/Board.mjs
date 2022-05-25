@@ -13,7 +13,7 @@ export class Board {
     this.height = height;
   }
 
-  tick(){fallingBlockLocation++;}
+  tick(){this.fallingBlockLocation++;}
 
   toString() {
     for (let i = 0; i < this.height; i++) {
