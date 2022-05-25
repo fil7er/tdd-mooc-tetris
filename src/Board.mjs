@@ -4,6 +4,7 @@ export class Board {
   falling = false;
   display = '';
   fallingBlock;
+  fallingBlockLocation = 0;
 
   drop(block){ this.falling = true; this.fallingBlock = block.color;}
 
@@ -12,7 +13,7 @@ export class Board {
     this.height = height;
   }
 
-  tick(){}
+  tick(){fallingBlockLocation++;}
 
   toString() {
     for (let i = 0; i < this.height; i++) {
