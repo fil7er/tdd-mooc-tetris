@@ -2,6 +2,7 @@ export class Board {
   width;
   height;
   falling = false;
+  display = '';
 
   drop(block){ this.falling = true; return block;}
 
@@ -11,7 +12,6 @@ export class Board {
   }
 
   toString() {
-    let display = '';
     for (let i = 0; i < this.height; i++) {
       for(let i2 = 0; i2 < this.width; i2++){
         display = display+'.';
