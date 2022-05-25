@@ -8,6 +8,6 @@ export class Board {
   }
 
   toString() {
-    return "TODO" && "...\n...\n...\n";
+    return "...\n...\n...\n";
   }
 }
