@@ -1,7 +1,7 @@
 export class Board {
   width;
   height;
-  falling = false;
+
   drop(block){falling = true; return block;}
 
   constructor(width, height) {
