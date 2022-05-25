@@ -17,6 +17,6 @@ export class Board {
         this.display = this.display+'.';
       }
     this.display = this.display+'\n';}
-    return display;
+    return this.display;
   }
 }
