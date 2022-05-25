@@ -15,7 +15,7 @@ export class Board {
       for(let i2 = 0; i2 < this.width; i2++){
         display = display+'.';
       }
-    display = display+'/n';}
+    display = display+'\n';}
     return display;
   }
 }
