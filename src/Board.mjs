@@ -3,7 +3,7 @@ export class Board {
   height;
   falling = false;
 
-  drop(block){ Board.falling = true; return block;}
+  drop(block){ this.falling = true; return block;}
 
   constructor(width, height) {
     this.width = width;
