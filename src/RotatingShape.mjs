@@ -2,7 +2,7 @@ export class RotatingShape{
     shape;
 
 
-    constructor(shape, where){
+    constructor(shape, where, exception){
         let row = shape.replaceAll(" ", "").trim().split("\n");
         this.shape = Array.from(Array(row.length), () => new Array(row.length));
         switch(where){
@@ -10,6 +10,10 @@ export class RotatingShape{
             case 2 : for(let y =this.shape.length-1;y>=0;y--) for(let x=0;x<this.shape.length;x++) this.shape[this.shape.length-1-y][x] = Array.from(row[x])[y]; break; //Left
             default : for(let y=0;y< this.shape.length;y++) for(let x=0;x< this.shape.length;x++) this.shape[y][x] = Array.from(row[y])[x]; break;
         }
+    }
+
+    isRotateBreaktheWalls(){
+        
     }
 
     rotateRight(){
