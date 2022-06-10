@@ -50,11 +50,25 @@ export class Board {
       }}
   }
 
+  hasAnotherBlockHere(y){
+    for (let [key, value] of this.blocksLocation.entries()) {
+      if (value == y) return true;
+      else return false;
+    }
+  }
+
+
+  drawBlocksAlreadyFalled(){
+    for (let [key, value] of this.blocksLocation.entries()) { 
+      this.board[value][1] = key;
+    }
+  }
+
   moveBlock(){
     for (let y = 0; y < this.height; y++) {
       for(let x = 0; x < this.width; x++){
-        if(y = this.fallingBlock && x == 1){
-          this.board[y][x] = this.fallingBlock;
+        if(y == fallingBlockLocation && x == 1 && this.falling){
+          if(!hasAnotherBlockHere(y)){this.board[y][x] = this.fallingBlock;}
         }
       }}
   }
