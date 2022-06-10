@@ -15,11 +15,15 @@ export class Board {
     throw("already falling");
   } 
   else{
-    this.fallingBlockLocation = 0;
+    this.createBoard();
+    this.drawBlocksAlreadyFalled();
     this.falling = true; 
     this.fallingBlock = block.color;
     this.blockNumber++;
+    this.fallingBlockLocation = 0;
     this.blocksLocation.set(this.blockNumber, [block.color, this.fallingBlockLocation]);
+    this.moveBlock();
+    console.log('many');
   }
 
 }
@@ -38,8 +42,8 @@ export class Board {
  
   tick(){
     switch(this.fallingBlockLocation){
-      case 2 : this.falling = false; break;
-      default : this.fallingBlockLocation++; break;
+      case this.height-1 : this.falling = false; break;
+      default : this.fallingBlockLocation++; this.moveBlock(); break;
     }
   }
 
@@ -52,7 +56,7 @@ export class Board {
 
   hasAnotherBlockHere(y){
     for (let [key, value] of this.blocksLocation.entries()) {
-      if (value == y) return true;
+      if (value == y && this.blockNumber != key) return true;
       else return false;
     }
   }
@@ -60,36 +64,22 @@ export class Board {
 
   drawBlocksAlreadyFalled(){
     for (let [key, value] of this.blocksLocation.entries()) { 
-      this.board[value][1] = key;
+      this.board[value[1]][1] = value[0];
     }
   }
 
   moveBlock(){
     for (let y = 0; y < this.height; y++) {
       for(let x = 0; x < this.width; x++){
-        if(y == fallingBlockLocation && x == 1 && this.falling){
-          if(!hasAnotherBlockHere(y)){this.board[y][x] = this.fallingBlock;}
+        if(y == this.fallingBlockLocation && x == 1 && (this.falling || this.fallingBlockLocation == this.height-1) && !this.hasAnotherBlockHere(y)){
+          this.board[y][x] = this.fallingBlock;
         }
+        else if(this.hasAnotherBlockHere(y)){}
+        else {this.board[y][x] = '.'; console.log('clear'+y+'-'+x+'is'+this.board[y][x]);}
       }}
   }
 
-  displaying(){
-    if(this.display != ''){this.display = '';}
-    for (let i = 0; i < this.height; i++) {
-      for(let i2 = 0; i2 < this.width; i2++){
-        console.log(i+'--'+this.fallingBlock+'-'+this.fallingBlockLocation);
-       this.falling && i2 == 1 && i== 0 && this.fallingBlockLocation == i ? this.display += this.fallingBlock: 
-        this.falling && i2 == 1 && i == 1 && this.fallingBlockLocation == i ? this.display += this.fallingBlock : 
-          (this.falling || this.fallingBlockLocation == this.height-1) && i2 == 1 && i == 2 && this.fallingBlockLocation == i ? this.display += this.fallingBlock : 
-            this.display += '.';
-      }
-    this.display = this.display+'\n';}
-    return this.display;
-  }
-
   toString() {
-    let board = (this.board.join("\n")).split(",").join("")+"\n";
-    console.log(board);
-    return this.displaying().toString();
+    return (this.board.join("\n")).split(",").join("")+"\n";
   }
 }
