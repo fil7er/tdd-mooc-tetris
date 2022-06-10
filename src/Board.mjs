@@ -13,6 +13,10 @@ export class Board {
     this.height = height;
     console.log(width+'-'+height);
   }
+
+  hasFalling(){
+    return this.falling;
+  }
  
   tick(){this.fallingBlockLocation++;}
 
