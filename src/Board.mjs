@@ -3,6 +3,7 @@ export class Board {
   height;
   falling = false;
   display = '';
+  board;
   fallingBlock;
   fallingBlockLocation = 0;
 
@@ -11,6 +12,7 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    
   }
 
   hasFalling(){
@@ -22,6 +24,13 @@ export class Board {
       case 2 : this.falling = false; break;
       default : this.fallingBlockLocation++; break;
     }
+  }
+
+  createBoard(){
+    for (let y = 0; y < this.height; y++) {
+      for(let x = 0; x < this.width; x++){
+        this.board[y][x] = '.';
+      }}
   }
 
   displaying(){
