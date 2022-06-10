@@ -15,11 +15,11 @@ export class Board {
     throw("already falling");
   } 
   else{
-
+    this.fallingBlockLocation = 0;
     this.falling = true; 
     this.fallingBlock = block.color;
     this.blockNumber++;
-    this.blocksLocation.set(this.blockNumber, [block.color, 0]);
+    this.blocksLocation.set(this.blockNumber, [block.color, this.fallingBlockLocation]);
   }
 
 }
@@ -74,6 +74,8 @@ export class Board {
   }
 
   toString() {
+    let board = (this.board.join("\n")).split(",").join("")+"\n";
+    console.log(board);
     return this.displaying().toString();
   }
 }
