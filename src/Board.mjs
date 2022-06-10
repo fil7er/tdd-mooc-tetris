@@ -6,27 +6,33 @@ export class Board {
   fallingBlock;
   fallingBlockLocation = 0;
 
-  drop(block){if(this.falling === true){throw("already falling");} this.falling = true; this.fallingBlock = block.color;}
+  drop(block){if(this.falling === true){throw("already falling");} else{this.falling = true; this.fallingBlock = block.color;}}
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    console.log(width+'-'+height);
   }
 
   hasFalling(){
     return this.falling;
   }
  
-  tick(){this.fallingBlockLocation++;}
+  tick(){
+    switch(this.fallingBlockLocation){
+      case 2 : this.falling = false; break;
+      default : this.fallingBlockLocation++; break;
+    }
+  }
 
   displaying(){
     if(this.display != ''){this.display = '';}
     for (let i = 0; i < this.height; i++) {
       for(let i2 = 0; i2 < this.width; i2++){
+        console.log(i+'--'+this.fallingBlock+'-'+this.fallingBlockLocation);
        this.falling && i2 == 1 && i== 0 && this.fallingBlockLocation == i ? this.display += this.fallingBlock: 
         this.falling && i2 == 1 && i == 1 && this.fallingBlockLocation == i ? this.display += this.fallingBlock : 
-          this.falling && i2 == 1 && i == 2 && this.fallingBlockLocation == i ? this.display += this.fallingBlock : this.display += '.';
+          (this.falling || this.fallingBlockLocation == this.height-1) && i2 == 1 && i == 2 && this.fallingBlockLocation == i ? this.display += this.fallingBlock : 
+            this.display += '.';
       }
     this.display = this.display+'\n';}
     return this.display;
