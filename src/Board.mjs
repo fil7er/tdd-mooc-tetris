@@ -6,6 +6,8 @@ export class Board {
   board;
   fallingBlock;
   fallingBlockLocation = 0;
+  blocksLocation;
+  blockNumber;
 
   drop(block){if(this.falling === true){throw("already falling");} else{this.falling = true; this.fallingBlock = block.color;}}
 
@@ -14,6 +16,7 @@ export class Board {
     this.height = height;
     this.board = Array.from(Array(height), () => new Array(width));
     this.createBoard();
+    this.blocksLocation = new Map();
   }
 
   hasFalling(){
@@ -31,6 +34,15 @@ export class Board {
     for (let y = 0; y < this.height; y++) {
       for(let x = 0; x < this.width; x++){
         this.board[y][x] = '.';
+      }}
+  }
+
+  moveBlock(){
+    for (let y = 0; y < this.height; y++) {
+      for(let x = 0; x < this.width; x++){
+        if(y = this.fallingBlock && x == 1){
+          this.board[y][x] = this.fallingBlock;
+        }
       }}
   }
 
