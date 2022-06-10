@@ -8,6 +8,7 @@ export class Board {
   fallingBlockLocation = 0;
   blocksLocation;
   blockNumber = 0;
+  isTouched = false;
 
   drop(block){
 
@@ -35,13 +36,22 @@ export class Board {
   }
 
   hasFalling(){
+    console.log('teste'-+this.falling);
     return this.falling;
+  }
+
+  touchBLock(y,x){
+    this.board[y-1][x] = this.fallingBlock;
+    this.isTouched = true;
+    console.log('done');
   }
  
   tick(){
-    switch(this.fallingBlockLocation){
-      case this.height-1 : this.falling = false; this.blocksLocation.set(this.blockNumber, [this.fallingBlock, this.fallingBlockLocation]); break;
-      default : this.fallingBlockLocation++; this.moveBlock(); break;
+    if(this.fallingBlockLocation >= this.height-1 && (this.falling == true || this.isTouched === true)){
+      this.falling = false; this.blocksLocation.set(this.blockNumber, [this.fallingBlock, this.fallingBlockLocation]);
+    }
+    else {
+      this.fallingBlockLocation++; this.moveBlock();
     }
   }
 
@@ -52,11 +62,13 @@ export class Board {
       }}
   }
 
-  hasAnotherBlockHere(y){
+  hasAnotherBlockHere(y, x){
     for (let [key, value] of this.blocksLocation.entries()) {
-      if (value[1] == y && this.blockNumber != key) return true;
-      else return false;
+      if (value[1] == y && x == 1 && this.blockNumber != key) {
+        return true;
+      }
     }
+    return false;
   }
 
 
@@ -69,12 +81,12 @@ export class Board {
   moveBlock(){
     for (let y = 0; y < this.height; y++) {
       for(let x = 0; x < this.width; x++){
-        if(y == this.fallingBlockLocation && x == 1 && (this.falling || this.fallingBlockLocation == this.height-1) && !this.hasAnotherBlockHere(y)){
+        console.log(y+'-'+x);
+        if(y == this.fallingBlockLocation && x == 1 && (this.falling || this.fallingBlockLocation == this.height-1) && !this.hasAnotherBlockHere(y, x)){
           this.board[y][x] = this.fallingBlock;
         }
         else {
-          console.log(this.hasAnotherBlockHere(y));
-          this.hasAnotherBlockHere(y) ? null : this.board[y][x] = '.';}
+          this.hasAnotherBlockHere(y, x) ? this.touchBLock(y,x) : this.board[y][x] = '.';}
       }}
   }
 
