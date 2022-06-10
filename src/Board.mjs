@@ -15,15 +15,13 @@ export class Board {
     throw("already falling");
   } 
   else{
-    this.createBoard();
-    this.drawBlocksAlreadyFalled();
     this.falling = true; 
     this.fallingBlock = block.color;
     this.blockNumber++;
     this.fallingBlockLocation = 0;
-    this.blocksLocation.set(this.blockNumber, [block.color, this.fallingBlockLocation]);
+    this.createBoard();
+    this.drawBlocksAlreadyFalled();
     this.moveBlock();
-    console.log('many');
   }
 
 }
@@ -42,7 +40,7 @@ export class Board {
  
   tick(){
     switch(this.fallingBlockLocation){
-      case this.height-1 : this.falling = false; break;
+      case this.height-1 : this.falling = false; this.blocksLocation.set(this.blockNumber, [this.fallingBlock, this.fallingBlockLocation]); break;
       default : this.fallingBlockLocation++; this.moveBlock(); break;
     }
   }
@@ -56,14 +54,14 @@ export class Board {
 
   hasAnotherBlockHere(y){
     for (let [key, value] of this.blocksLocation.entries()) {
-      if (value == y && this.blockNumber != key) return true;
+      if (value[1] == y && this.blockNumber != key) return true;
       else return false;
     }
   }
 
 
   drawBlocksAlreadyFalled(){
-    for (let [key, value] of this.blocksLocation.entries()) { 
+    for (let [key, value] of this.blocksLocation.entries()) {
       this.board[value[1]][1] = value[0];
     }
   }
@@ -74,8 +72,9 @@ export class Board {
         if(y == this.fallingBlockLocation && x == 1 && (this.falling || this.fallingBlockLocation == this.height-1) && !this.hasAnotherBlockHere(y)){
           this.board[y][x] = this.fallingBlock;
         }
-        else if(this.hasAnotherBlockHere(y)){}
-        else {this.board[y][x] = '.'; console.log('clear'+y+'-'+x+'is'+this.board[y][x]);}
+        else {
+          console.log(this.hasAnotherBlockHere(y));
+          this.hasAnotherBlockHere(y) ? null : this.board[y][x] = '.';}
       }}
   }
 
