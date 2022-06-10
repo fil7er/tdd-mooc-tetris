@@ -7,9 +7,22 @@ export class Board {
   fallingBlock;
   fallingBlockLocation = 0;
   blocksLocation;
-  blockNumber;
+  blockNumber = 0;
 
-  drop(block){if(this.falling === true){throw("already falling");} else{this.falling = true; this.fallingBlock = block.color;}}
+  drop(block){
+
+  if(this.falling === true){
+    throw("already falling");
+  } 
+  else{
+
+    this.falling = true; 
+    this.fallingBlock = block.color;
+    this.blockNumber++;
+    this.blocksLocation.set(this.blockNumber, [block.color, 0]);
+  }
+
+}
 
   constructor(width, height) {
     this.width = width;
